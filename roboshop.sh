@@ -4,7 +4,8 @@
 AMI_ID="ami-09c813fb71547fc4f"
 # in the top menu bar of the ID address --> select Security --> select security groups ID
 SG_ID="sg-0dbb4d1864e2681be"
-INSTANCES=("mongodb" "redis" "mysql" "rabbitmq" "catalogue" "user" "cart" "shipping" "payment" "dispatch" "frontend")
+#INSTANCES=("mongodb" "redis" "mysql" "rabbitmq" "catalogue" "user" "cart" "shipping" "payment" "dispatch" "frontend")
+INSTANCES=("$@")
 ZONE_ID="Z04142321DEUW88VF6DED" #go to hosted zones --> click HZ details --> copy HZ ID
 DOMAIN_NAME="tharun78daws84s.site"
 
