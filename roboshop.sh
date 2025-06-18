@@ -34,7 +34,7 @@ do
               "Name"             : "'$instance'.'$DOMAIN_NAME'"
              ,"Type"            : "A"
              ,"TTL"             : 1
-                ,"ResourceRecords" : [{
+             ,"ResourceRecords" : [{
                    "Value"         : "'$IP'"
                 }] 
             }
