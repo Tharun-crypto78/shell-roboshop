@@ -8,6 +8,7 @@ INSTANCES=("mongodb" "redis" "mysql" "rabbitmq" "catalogue" "user" "cart" "shipp
 #INSTANCES=("$@")
 ZONE_ID="Z04142321DEUW88VF6DED" #go to hosted zones --> click HZ details --> copy HZ ID
 DOMAIN_NAME="tharun78daws84s.site" # replace with your domain.
+RECORD_NAME=
 
 #Now we can loop it
 for instance in ${INSTANCES[@]}
@@ -25,7 +26,7 @@ do
     aws route53 change-resource-record-sets \
   --hosted-zone-id $ZONE_ID \
   --change-batch '
-  {
+    {
         "Comment": "Creating or updating a record set for cognito endpoint"
         ,"Changes": [{
          "Action"             : "UPSERT"
