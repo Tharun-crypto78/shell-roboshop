@@ -4,8 +4,8 @@
 AMI_ID="ami-09c813fb71547fc4f"
 # in the top menu bar of the ID address --> select Security --> select security groups ID
 SG_ID="sg-0dbb4d1864e2681be"
-#INSTANCES=("mongodb" "redis" "mysql" "rabbitmq" "catalogue" "user" "cart" "shipping" "payment" "dispatch" "frontend")
-INSTANCES=("$@")
+INSTANCES=("mongodb" "redis" "mysql" "rabbitmq" "catalogue" "user" "cart" "shipping" "payment" "dispatch" "frontend")
+#INSTANCES=("$@")
 ZONE_ID="Z04142321DEUW88VF6DED" #go to hosted zones --> click HZ details --> copy HZ ID
 DOMAIN_NAME="tharun78daws84s.site" # replace with your domain.
 
@@ -24,19 +24,19 @@ do
 
     aws route53 change-resource-record-sets \
   --hosted-zone-id $ZONE_ID \
-  --change-batch
+  --change-batch '
   {
-        "Comment": "Creating OR Updating a record set for cognito endpoint"
-        ,"Changes": [{
-        "Action"              : "UPSERT" #upsert creates a record if not so created, and if so already created then it overwrites the existing one.
-        ,"ResourceRecordSet"  : {
-            "Name"              : "'$instance'.'$DOMAIN_NAME'"
-            ,"Type"             : "A"
-            ,"TTL"              : 1
-            ,"ResourceRecords"  : [{
+         "Comment": "Creating or updating a record set for cognito endpoint"
+         ,"Changes": [{
+         "Action"             : "UPSERT"
+         ,"ResourceRecordSet" : {
+              "Name"             : "'$instance'.'$DOMAIN_NAME'"
+             ,"Type"            : "A"
+             ,"TTL"             : 1
+             ,"ResourceRecords" : [{
                 "Value"         : "'$IP'"
-            }]
-      }
-      }]  
-  }'
+                 }] 
+             }
+             }]
+    }'
 done
