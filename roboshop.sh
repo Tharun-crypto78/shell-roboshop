@@ -11,7 +11,7 @@ DOMAIN_NAME="tharun78daws84s.site"
 #Now we can loop it
 for instance in ${INSTANCES[@]}
 do
-    if [ $instance ] #privateIPaddress will be used when if not equal to frontend
+    # if [ $instance ] #privateIPaddress will be used when if not equal to frontend
     INSTANCE_ID=$(aws ec2 run-instances --image-id ami-09c813fb71547fc4f --instance-type t2.micro --security-group-ids sg-0dbb4d1864e2681be --tag-specifications “ResourceType=instance,Tags=[{key=Name, Value=$instance}]” --query “Instances[0].InstanceId” --output text) #if this command executes, we'll get the instance id which will be stored inside the INSTANCE_ID variable
     if [ $instance != "frontend" ]
     then
