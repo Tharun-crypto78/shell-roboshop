@@ -33,7 +33,7 @@ VALIDATE(){
     fi
 }
 
-cp mongo.repo /etc/yum.repos.d/mongo.repo # /mongo.repo can be given with any name of our choice but .repo is must
+cp mongo.repo /etc/yum.repos.d/mongodb.repo # /mongo.repo can be given with any name of our choice but .repo is must
 VALIDATE $? "Copying MONGODB repo" # it can be either mongo.repo or mongodb.repo, but having .repo is mandatory.
 
 dnf install mongodb-org -y &>>$LOG_FILE      # Here we need to redirect the log files by using &>>$LOG_FILE
