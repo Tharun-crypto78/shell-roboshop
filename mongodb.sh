@@ -40,10 +40,10 @@ dnf install mongodb-org -y &>>$LOG_FILE      # Here we need to redirect the log 
 VALIDATE $? "Installing mongodb server"
 
 systemctl enable mongod &>>$LOG_FILE
-VALIDATE $? "Enabling MONGODB"
+VALIDATE $? "Enabling MongoDB"
 
 systemctl start mongod &>>$LOG_FILE
-VALIDATE $? "Starting MONGODB"
+VALIDATE $? "Starting MongoDB"
 
 # Now we need to change the file content inside the etc/mongodb.conf --> you can change it by using SED editor
 sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf
