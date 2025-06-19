@@ -57,7 +57,7 @@ cd /app
 unzip /tmp/catalogue.zip &>>$LOG_FILE
 VALIDATE $? "unzipping catalogue"
 
-npm install
+npm install &>>LOG_FILE
 VALIDATE $? "Installing Dependencies"
 
 cp $SCRIPT_DIR/catalogue.service /etc/systemd/system/catalogue.service  #At present we're in the app location of the script --> which don't contain catalogue.service so it will fail --> If it have to should work irrelevant of wherever it is present then give "absolute path"
@@ -73,4 +73,5 @@ dnf install mongodb-mongosh -y &>>$LOG_FILE
 VALIDATE $? "Installing MongoDB Client"
 
 mongosh --host mongodb.tharun78daws84s.site </app/db/master-data.js &>>$LOG_FILE
+VALIDATE $? "Loading data into MongoDB"
 
