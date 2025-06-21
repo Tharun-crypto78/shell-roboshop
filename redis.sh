@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # At 1st we need the root access for all --> so we need to check the root access 
+START_TIME=$(date +%s)
 USERID=$(id -u)
 R="\e[31m"
 G="\e[32m"
