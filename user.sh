@@ -35,7 +35,6 @@ VALIDATE(){
         exit 1
     fi
 }
-
 # Following the commands present in the git repo user documentation
 dnf module disable nodejs -y &>>$LOG_FILE
 VALIDATE $? "Disabling default nodejs"
@@ -59,7 +58,7 @@ mkdir -p /app
 VALIDATE $? "Creating app directory"
 
 curl -o /tmp/user.zip https://roboshop-artifacts.s3.amazonaws.com/user-v3.zip &>>$LOG_FILE
-VALIDATE $? "Downloading  user"
+VALIDATE $? "Downloading user"
 
 rm -rf /app/* # to remove the content present inside the app directory
 cd /app 
@@ -69,7 +68,7 @@ VALIDATE $? "unzipping user"
 npm install &>>LOG_FILE
 VALIDATE $? "Installing Dependencies"
 
-cp $SCRIPT_DIR/user.service /etc/systemd/system/user.service  #At present we're in the app location of the script --> which don't contain catalogue.service so it will fail --> If it have to should work irrelevant of wherever it is present then give "absolute path"
+cp $SCRIPT_DIR/user.service /etc/systemd/system/user.service  #At present we're in the app location of the script --> which don't contain user.service so it will fail --> If it have to should work irrelevant of wherever it is present then give "absolute path"
 VALIDATE $? "Copying user service"
 
 systemctl daemon-reload &>>$LOG_FILE
@@ -81,17 +80,3 @@ END_TIME=$(date +%s)
 TOTAL_TIME=$(( $END_TIME - $START_TIME ))
 
 echo -e "Script execution completed successfully, $Y time taken: $TOTAL_TIME seconds $N" | tee -a $LOG_FILE
-
-# cp $SCRIPT_DIR/mongo.repo /etc/yum.repos.d/mongo.repo
-# dnf install mongodb-mongosh -y &>>$LOG_FILE
-# VALIDATE $? "Installing MongoDB Client"
-
-# STATUS=$(mongosh --host mongodb.tharun78daws84s.site --eval 'db.getMongo().getDBNames().indexOf("catalogue")')
-# if [ $STATUS -lt 0 ]
-# then
-#     mongosh --host mongodb.tharun78daws84s.site </app/db/master-data.js &>>$LOG_FILE
-#     VALIDATE $? "Loading data into MongoDB"
-# else
-#     echo -e "Data is already loaded ... $Y SKIPPING $N"
-# fi
-
