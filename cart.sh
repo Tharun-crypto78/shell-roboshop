@@ -82,16 +82,3 @@ TOTAL_TIME=$(( $END_TIME - $START_TIME ))
 
 echo -e "Script execution completed successfully, $Y time taken: $TOTAL_TIME seconds $N" | tee -a $LOG_FILE
 
-# cp $SCRIPT_DIR/mongo.repo /etc/yum.repos.d/mongo.repo
-# dnf install mongodb-mongosh -y &>>$LOG_FILE
-# VALIDATE $? "Installing MongoDB Client"
-
-# STATUS=$(mongosh --host mongodb.tharun78daws84s.site --eval 'db.getMongo().getDBNames().indexOf("catalogue")')
-# if [ $STATUS -lt 0 ]
-# then
-#     mongosh --host mongodb.tharun78daws84s.site </app/db/master-data.js &>>$LOG_FILE
-#     VALIDATE $? "Loading data into MongoDB"
-# else
-#     echo -e "Data is already loaded ... $Y SKIPPING $N"
-# fi
-
