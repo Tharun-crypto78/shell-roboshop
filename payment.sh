@@ -36,10 +36,10 @@ VALIDATE(){
     fi
 }
 # Following the commands present in the git repo user documentation
-dnf install python3 gcc python3-devel -y &>>$LOGS_FOLDER
+dnf install python3 gcc python3-devel -y &>>$LOG_FILE
 VALIDATE $? "Installing Python3 package"
 
-id roboshop &>>$LOGS_FOLDER
+id roboshop &>>$LOG_FILE
 if [ $? -ne 0 ]
 then
     useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$LOG_FILE
@@ -59,19 +59,19 @@ cd /app
 unzip /tmp/payment.zip &>>$LOG_FILE
 VALIDATE $? "unzipping payment"
 
-pip3 install -r requirements.txt &>>$LOGS_FOLDER
+pip3 install -r requirements.txt &>>$LOG_FILE
 VALIDATE $? "Installing dependencies"
 
-cp $SCRIPT_DIR/payment.service /etc/systemd/system/payment.service &>>$LOGS_FOLDER
+cp $SCRIPT_DIR/payment.service /etc/systemd/system/payment.service &>>$LOG_FILE
 VALIDATE $? "Copying payment service"
 
-systemctl daemon-reload &>>$LOGS_FOLDER
+systemctl daemon-reload &>>$LOG_FILE
 VALIDATE $? "Daemon reload"
 
-systemctl enable payment &>>$LOGS_FOLDER
+systemctl enable payment &>>$LOG_FILE
 VALIDATE $? "Enable payment"
 
-systemctl start payment &>>$LOGS_FOLDER
+systemctl start payment &>>$LOG_FILE
 VALIDATE $? "Starting payment"
 
 END_TIME=$(date +%s)
